@@ -1,0 +1,6 @@
+# Ignore Python bytecode files
+__pycache__/
+
+# Cache from the IDE
+.idea/
+.vscode/
