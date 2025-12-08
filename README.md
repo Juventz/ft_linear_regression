@@ -63,9 +63,9 @@ Where `m` is the number of training examples.
 1. Clone the repository.
 
 2. Install dependencies:
-\`\`\`bash
+```bash
 pip install -r requirements.txt
-\`\`\`
+```
 
 ---
 
@@ -75,10 +75,10 @@ pip install -r requirements.txt
 
 Run the training program from the `src/` directory:
 
-\`\`\`bash
+```bash
 cd src/
 python training.py
-\`\`\`
+```
 
 **What it does:**
 - Loads the dataset from `../data/data.csv`
@@ -96,9 +96,9 @@ python training.py
 
 Run the prediction program:
 
-\`\`\`bash
+```bash
 python prediction.py
-\`\`\`
+```
 
 **What it does:**
 - Loads the trained model from `model.json`
@@ -107,16 +107,16 @@ python prediction.py
 - Validates input (must be numeric)
 
 **Example:**
-\`\`\`
+```
 Enter the mileage of the car: 150000
 Predicted price: €4,850
-\`\`\`
+```
 
 ---
 
 ## Project Structure
 
-\`\`\`
+```
 ft_linear_regression/
 ├── README.md                 # This file
 ├── requirements.txt          # Python dependencies
@@ -129,7 +129,7 @@ ft_linear_regression/
     ├── csv_utils.py         # CSV file loading utilities
     ├── visualisation.py     # Plotting and metrics functions
     └── model.json           # Saved model parameters
-\`\`\`
+```
 
 ---
 
@@ -160,7 +160,7 @@ Mileage is normalized to [0, 1] range for numerical stability:
 ## Output Interpretation
 
 ### Training Output Example
-\`\`\`
+```
 CSV file loaded successfully.
 Training model...
 ✓ Training complete!
@@ -192,13 +192,13 @@ Initial Cost (MSE): €3,500,000.00
 Final Cost (MSE): €445,000.00
 Cost Reduction: 87.29%
 ✓ Excellent convergence! The model learned very well.
-\`\`\`
+```
 
 ### Prediction Output Example
-\`\`\`
+```
 Enter the mileage of the car: 100000
 Predicted price: €5,250
-\`\`\`
+```
 
 ---
 
