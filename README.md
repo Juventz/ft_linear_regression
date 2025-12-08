@@ -229,8 +229,3 @@ Lower learning rates train slower but more stably; higher values risk divergence
 - **White**: Data values and metrics
 - **Red (✗)**: Errors and issues
 
----
-
-## Author
-
-Created as part of the ft_linear_regression project.
