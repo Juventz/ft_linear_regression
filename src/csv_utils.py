@@ -13,27 +13,28 @@ def read_csv(file_path: str) -> pd.DataFrame:
 
     Returns:
         pd.DataFrame: The loaded DataFrame.
+        
+    Raises:
+        FileNotFoundError: If the file does not exist.
+        IOError: If the file is not readable.
+        pd.errors.ParserError: If the CSV cannot be parsed.
+        pd.errors.EmptyDataError: If the CSV file is empty.
     """
     try:
         df = pd.read_csv(file_path)
         print(Fore.GREEN + "CSV file loaded successfully.")
         return df
 
-    except IOError:
+    except FileNotFoundError as e:
+        raise FileNotFoundError(f"{file_path} not found.") from e
+    except IOError as e:
         if not access(file_path, R_OK):
-            print(Fore.RED + f'{file_path} is not readable.')
+            raise IOError(f"{file_path} is not readable.") from e
         else:
-            print(Fore.RED + f"{file_path} is not a valid CSV file.")
-        return None
-    except pd.errors.ParserError:
-        print(Fore.RED + f"{file_path} could not be parsed.")
-        return None
-    except pd.errors.EmptyDataError:
-        print(Fore.RED + f"{file_path} is empty.")
-        return None
-    except FileNotFoundError:
-        print(Fore.RED + f"{file_path} not found.")
-        return None
+            raise IOError(f"{file_path} is not a valid CSV file.") from e
+    except pd.errors.EmptyDataError as e:
+        raise pd.errors.EmptyDataError(f"{file_path} is empty.") from e
+    except pd.errors.ParserError as e:
+        raise pd.errors.ParserError(f"{file_path} could not be parsed.") from e
     except Exception as e:
-        print(Fore.RED + f"{type(e).__name__}: {e}")
-        return None
+        raise Exception(f"{type(e).__name__}: {e}") from e

@@ -1,5 +1,6 @@
 from colorama import init, Fore 
 import numpy as np
+import pandas as pd
 from csv_utils import read_csv
 from training_utils import prepare_data, gradient_descent, model, r_squared, save_model, plot_results
 from visualisation import plot_all_visualizations, display_precision_metrics
@@ -11,12 +12,10 @@ def main():
     """Main training pipeline."""
     try:
         df = read_csv('../data/data.csv')
-        if df is None:
-            return
         
         # Check for negative values in mileage and price
         if (df < 0).any().any():
-            raise ValueError(Fore.RED + "Mileage and Price must be non-negative.")
+            raise ValueError("Mileage and Price must be non-negative.")
         
         # Prepare data 
         X, Y, norm_params = prepare_data(df)
@@ -52,10 +51,24 @@ def main():
         mileage_original = np.array(df.iloc[:, 0].values, dtype=float)
         plot_all_visualizations(mileage_original, Y, cost_history, theta_final[1, 0], theta_final[0, 0])
         
+    except FileNotFoundError as e:
+        print(f"{Fore.RED}✗ FileNotFoundError: {e}")
+        return
+    except IOError as e:
+        print(f"{Fore.RED}✗ IOError: {e}")
+        return
+    except pd.errors.EmptyDataError as e:
+        print(f"{Fore.RED}✗ EmptyDataError: {e}")
+        return
+    except pd.errors.ParserError as e:
+        print(f"{Fore.RED}✗ ParserError: {e}")
+        return
+    except ValueError as e:
+        print(f"{Fore.RED}✗ ValueError: {e}")
+        return
     except KeyboardInterrupt:
         print(f"\n{Fore.RED}✗ Training interrupted by user.")
         return
-    
     except Exception as e:
         print(f"{Fore.RED}✗ {type(e).__name__}: {e}")
         return
