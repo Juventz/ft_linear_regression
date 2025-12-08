@@ -4,7 +4,7 @@ from os import access, R_OK
 
 init(autoreset=True)
 
-def load_csv(file_path: str) -> pd.DataFrame:
+def read_csv(file_path: str) -> pd.DataFrame:
     """
     Load a CSV file into a pandas DataFrame.
 

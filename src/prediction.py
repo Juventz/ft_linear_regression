@@ -1,4 +1,7 @@
 import json
+from colorama import Fore, init
+
+init(autoreset=True)
 
 
 def predict_price(mileage, theta0, theta1):
@@ -29,26 +32,29 @@ def main():
         while(42):
             mileage = input("Enter the mileage of the car: ")
             if not mileage:
-                print("Mileage input cannot be empty. Please try again.")
+                print(f"{Fore.RED}Mileage input cannot be empty. Please try again.")
             else:
                 try:
                     assert(all(char.isdigit() for char in mileage)), "Mileage must be a numeric value."
                     break
                 except AssertionError as error:
-                    print(f"Input Error: {error}")
+                    print(f"{Fore.RED}Input Error: {error}")
     
         predicted_price = predict_price(mileage, theta0, theta1)
         if predicted_price <= 0:
-            print("The predicted price is negative or null, which is not valid.")
+            print(f"{Fore.RED}The predicted price is negative or null, which is not valid.")
         else:
-            print(f"Predicted price: {predicted_price}")
+            print(f"{Fore.GREEN}Predicted price: €{predicted_price:,}")
             return 
 
     except KeyboardInterrupt:
-        print("\nProcess interrupted by user.")
+        print(f"\n{Fore.RED}Process interrupted by user.")
         return  
+    except FileNotFoundError:
+        print(f"{Fore.RED}Error: model.json not found. Please train the model first by running training.py")
+        return
     except Exception as e:
-        print(f"{type(e).__name__}: {e}")
+        print(f"{Fore.RED}{type(e).__name__}: {e}")
         return
 
 
