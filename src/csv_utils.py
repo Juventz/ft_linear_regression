@@ -26,15 +26,15 @@ def read_csv(file_path: str) -> pd.DataFrame:
         return df
 
     except FileNotFoundError as e:
-        raise FileNotFoundError(f"{file_path} not found.") from e
+        raise FileNotFoundError(Fore.RED + f"{file_path} not found.") from e
     except IOError as e:
         if not access(file_path, R_OK):
-            raise IOError(f"{file_path} is not readable.") from e
+            raise IOError(Fore.RED + f"{file_path} is not readable.") from e
         else:
-            raise IOError(f"{file_path} is not a valid CSV file.") from e
+            raise IOError(Fore.RED + f"{file_path} is not a valid CSV file.") from e
     except pd.errors.EmptyDataError as e:
-        raise pd.errors.EmptyDataError(f"{file_path} is empty.") from e
+        raise pd.errors.EmptyDataError(Fore.RED + f"{file_path} is empty.") from e
     except pd.errors.ParserError as e:
-        raise pd.errors.ParserError(f"{file_path} could not be parsed.") from e
+        raise pd.errors.ParserError(Fore.RED + f"{file_path} could not be parsed.") from e
     except Exception as e:
-        raise Exception(f"{type(e).__name__}: {e}") from e
+        raise Exception(Fore.RED + f"{type(e).__name__}: {e}") from e

@@ -1,6 +1,9 @@
+from pathlib import Path
+
 from colorama import init, Fore 
 import numpy as np
 import pandas as pd
+
 from csv_utils import read_csv
 from training_utils import prepare_data, gradient_descent, model, r_squared, save_model, plot_results
 from visualisation import plot_all_visualizations, display_precision_metrics
@@ -11,7 +14,10 @@ init(autoreset=True)
 def main():
     """Main training pipeline."""
     try:
-        df = read_csv('../data/data.csv')
+        base_dir = Path(__file__).resolve().parent.parent
+        data_path = base_dir / 'data' / 'data.csv'
+
+        df = read_csv(str(data_path))
         
         # Check for negative values in mileage and price
         if (df < 0).any().any():
