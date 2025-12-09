@@ -14,11 +14,19 @@ def normalize_features(mileage):
     Returns:
         tuple: (normalized_mileage, min_value, max_value)
     """
+    # Reject NaN or infinite values early to avoid runtime warnings
+    if not np.isfinite(mileage).all():
+        raise ValueError("Input contains NaN or infinite values.")
+
     min_val = np.min(mileage)
     max_val = np.max(mileage)
-    normalized = (mileage - min_val) / (max_val - min_val)
-    return normalized, min_val, max_val
+    # Handle case where all values are the same to avoid division by zero
+    if max_val == min_val:
+        normalized = np.zeros_like(mileage, dtype=float)
+    else:
+        normalized = (mileage - min_val) / (max_val - min_val)
 
+    return normalized, min_val, max_val
 
 def prepare_data(df):
     """
