@@ -58,11 +58,17 @@ Where `m` is the number of training examples.
 - Python 3.x
 - Dependencies listed in `requirements.txt`
 
-### Setup
+### Setup (virtualenv)
 
 1. Clone the repository.
-
-2. Install dependencies:
+2. Create a local virtual environment (recommended name: `.venv`):
+```bash
+python3 -m venv .venv
+```
+3. Activate it:
+   - Linux/macOS: `source .venv/bin/activate`
+   - Windows (PowerShell): `.venv\Scripts\Activate`
+4. Install dependencies inside the env:
 ```bash
 pip install -r requirements.txt
 ```
